@@ -13,6 +13,8 @@ app.use(express.json())
 app.use(cookieParser())
 
 // 1. Routes
+
+// 2. Let's setup cookie and send it to the Browser the first time and then Browser will sent it on every request:
 app.get('/', (req, res) => {
   // Setup cookies for the first time as user visits homepage
   res.cookie('username', 'Imran', {
@@ -27,8 +29,6 @@ app.get('/', (req, res) => {
     }
   })
 })
-
-// 2. Let's setup cookie and send it to the Browser the first time and then Browser will sent it on every request:
 
 app.get('/login', (req, res) => {
   //  Access cookie with req.cookies.cookieName

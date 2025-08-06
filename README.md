@@ -39,3 +39,22 @@ app.get('/get-cookie', (req, res) => {
   res.send('Cookies fetched! Check console.')
 })
 ```
+
+## secure, httpOnly, and sameSite
+
+1. `httpOnly: true`
+
+Means JavaScript in the browser can’t access the cookie (`document.cookie`). Prevents XSS attacks.
+
+2. `secure: true`
+
+Cookie is only sent over HTTPS.
+🔒 Use this only in production, otherwise local dev (HTTP) will break the cookie.
+
+3. `sameSite`
+
+Controls cross-origin cookie behavior.
+
+- `strict`: Only sent to same-origin (most secure)
+- `lax`: Sent on top-level navigations (default)
+- `none`: Needed if your frontend/backend are on different domains (must set secure: true too)
