@@ -58,3 +58,12 @@ Controls cross-origin cookie behavior.
 - `strict`: Only sent to same-origin (most secure)
 - `lax`: Sent on top-level navigations (default)
 - `none`: Needed if your frontend/backend are on different domains (must set secure: true too)
+
+## 🧠 Now: Let’s Move to Sessions
+
+Time to tackle:
+
+- Server-side persistance
+- express-session magic
+- Session IDs
+- Cookies pointing to server memory
