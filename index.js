@@ -34,7 +34,7 @@ app.get('/login', (req, res) => {
   //  Access cookie with req.cookies.cookieName
   console.log(req.cookies)
 
-  if (req.cookies.username === 'Tmran') {
+  if (req.cookies.username === 'Imran') {
     res.status(200).json({
       success: true,
       data: {
