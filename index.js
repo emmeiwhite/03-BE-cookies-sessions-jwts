@@ -2,7 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import { success } from 'zod'
+import session from 'express-session'
 
 dotenv.config()
 
@@ -11,6 +11,18 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
+
+app.use(
+  session({
+    secret: 'mySecretSessionKey',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60 * 10, // 10 min
+      httpOnly: true
+    }
+  })
+)
 
 // 1. Routes
 
