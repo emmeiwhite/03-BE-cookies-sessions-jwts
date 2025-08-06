@@ -92,3 +92,11 @@ Time to tackle:
                   │  Server fetches user from session store│
                   ◀───────────────────────────────────────┤
                   │  Responds with "Welcome back Imran"    │
+
+## 🧪 HOW TO TEST IT
+
+- 🔁 Visit /session-login → browser gets Set-Cookie with sessionId
+
+- ✅ Visit /session-check → server checks session store and responds
+
+- 🧼 Visit /logout → session destroyed from server
