@@ -15,3 +15,27 @@ They were originally invented for:
 - Tracking (e.g., analytics, ads)
 
 🧠 A cookie is like a name tag. When the browser returns to the server, it says: `"Hey, I’m Imran – here's my tag!"`
+
+## 🧩 2. What Does cookie-parser Do?
+
+The **cookie-parser** middleware:
+
+- **Parses** the `Cookie` header sent by the browser. Analogy, What does `express.json()` do? Parses the `req.body({})`.
+- **Attaches** the parsed cookie object to `req.cookies` so you can access it like: `req.cookies.token` or `req.cookies.theme`.
+
+It **doesn't** create cookies. You still set them using `res.cookie()`.
+
+```js
+app.get('/set-cookie', (req, res) => {
+  res.cookie('username', 'Imran', {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 5 // 5 minutes
+  })
+  res.send('Cookie has been set!')
+})
+
+app.get('/get-cookie', (req, res) => {
+  console.log(req.cookies)
+  res.send('Cookies fetched! Check console.')
+})
+```
