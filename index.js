@@ -24,9 +24,32 @@ app.use(
   })
 )
 
+// Login route that sets session
+app.get('/session-login', (req, res) => {
+  req.session.user = 'Imran'
+  res.send('Session set for Imran')
+})
+
+// Access session
+app.get('/session-check', (req, res) => {
+  if (req.session.user) {
+    res.send(`Welcome back ${req.session.user}`)
+  } else {
+    res.send('No session found')
+  }
+})
+
+// Destroy session
+app.get('/logout', (req, res) => {
+  req.session.destroy()
+  res.send('Logged out and session destroyed')
+})
+
 // 1. Routes
 
 // 2. Let's setup cookie and send it to the Browser the first time and then Browser will sent it on every request:
+
+/* ---
 app.get('/', (req, res) => {
   // Setup cookies for the first time as user visits homepage
   res.cookie('username', 'Imran', {
@@ -62,6 +85,7 @@ app.get('/login', (req, res) => {
     })
   }
 })
+  --- */
 
 const PORT = process.env.PORT || 3000
 
