@@ -3,11 +3,13 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import session from 'express-session'
+import { logger } from './middlewares/logger.js'
 
 dotenv.config()
 
 const app = express()
 
+app.use(logger)
 app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
