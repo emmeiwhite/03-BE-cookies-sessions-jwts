@@ -14,8 +14,6 @@ connectDB()
 
 const app = express()
 
-app.use('/api/v1', authRouter)
-
 // Core Middlewares
 app.use(logger)
 app.use(cors())
@@ -27,6 +25,7 @@ app.get('/', (req, res) => {
   })
 })
 
+app.use('/api/v1', authRouter)
 // 404 Middleware
 app.use(notFound)
 
