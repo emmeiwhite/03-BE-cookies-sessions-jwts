@@ -4,8 +4,12 @@ import cors from 'cors'
 import { logger } from './middlewares/logger.js'
 import notFound from './middlewares/notFound.js'
 import errorHandler from './middlewares/errorHandler.js'
+import connectDB from './db/dbConnect.js'
 
 dotenv.config()
+
+// DB Connection
+connectDB()
 
 const app = express()
 
