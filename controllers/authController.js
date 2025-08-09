@@ -15,6 +15,24 @@ export const signUp = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({ success: false, msg: 'Email already registered' })
     }
+
+    // 3. Hash the password
+    const salt = await bcrypt.genSalt(10)
+    const hashedPassword = await bcrypt.hash(password, salt)
+
+    // 4. Create user
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword
+    })
+
+    // 5. Respond
+    res.status(201).json({
+      success: true,
+      msg: 'User registered successfully',
+      data: { id: user._id, email: user.email, name: user.name }
+    })
   } catch (error) {
     req.status(500).json()
   }
