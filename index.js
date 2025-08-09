@@ -5,6 +5,7 @@ import { logger } from './middlewares/logger.js'
 import notFound from './middlewares/notFound.js'
 import errorHandler from './middlewares/errorHandler.js'
 import connectDB from './db/dbConnect.js'
+import authRouter from './routes/authRoutes.js'
 
 dotenv.config()
 
@@ -12,6 +13,8 @@ dotenv.config()
 connectDB()
 
 const app = express()
+
+app.use('/api/v1', authRouter)
 
 // Core Middlewares
 app.use(logger)
