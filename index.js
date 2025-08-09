@@ -2,12 +2,14 @@ import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import { logger } from './middlewares/logger.js'
+import notFound from './middlewares/notFound.js'
+import errorHandler from './middlewares/errorHandler.js'
 
 dotenv.config()
 
 const app = express()
 
-// Middlewares
+// Core Middlewares
 app.use(logger)
 app.use(cors())
 app.use(express.json())
@@ -17,6 +19,12 @@ app.use('/', (req, res) => {
     msg: 'All is well, that starts well'
   })
 })
+
+// 404 Middleware
+app.use(notFound)
+
+// Error Handler Middleware
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 3000
 
