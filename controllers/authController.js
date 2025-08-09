@@ -1,17 +1,12 @@
-import { success } from 'zod'
+import User from '../models/User.js'
 
-export const signUp = (req, res) => {
+export const signUp = async (req, res) => {
+  console.log(req.body)
+  // Testing
+  const user = await User.create(req.body)
+
   res.status(200).json({
     success: true,
     msg: 'User successfully signed up'
-  })
-}
-
-export const dashboard = (req, res) => {
-  const luckyNumber = Math.floor(Math.random() * 100)
-  res.status(200).json({
-    success: true,
-    msg: `Hello John! Welcome`,
-    secret: `Here is your authorized data. You lucky Number is ${luckyNumber}`
   })
 }
