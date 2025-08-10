@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
+import cookieParser from 'cookie-parser'
 import { logger } from './middlewares/logger.js'
 import notFound from './middlewares/notFound.js'
 import errorHandler from './middlewares/errorHandler.js'
@@ -14,9 +15,19 @@ connectDB()
 
 const app = express()
 
+// Cookie-Parser to parse cookie which is JWT basically
+app.use(cookieParser())
+
 // Core Middlewares
 app.use(logger)
-app.use(cors())
+// allow credentials so browser sends cookies
+app.use(
+  cors({
+    origin: 'http://localhost:5173', // your React app origin
+    credentials: true
+  })
+)
+
 app.use(express.json())
 
 app.get('/', (req, res) => {
