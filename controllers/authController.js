@@ -71,6 +71,11 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ success: false, msg: 'Invalid password' })
     }
+
+    // 4. Proceed to JWT creation (If email & password are correct)
+    /**  We know that JWT has 3 parts Header.Payload.Signature, As a BE Developer we create payload, rest jsonwebtoken packages manages  */
+
+    const payload = { userId: user._id.toString(), username: user.username }
   } catch (error) {
     res.status(500).json({
       success: false,
