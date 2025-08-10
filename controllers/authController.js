@@ -14,7 +14,7 @@ export const signUp = async (req, res) => {
       return res.status(400).json({ success: false, msg: 'All fields are required' })
     }
 
-    // 2. Check if user already exists
+    // 2. Check if user already exists with email
     const existingUser = await User.findOne({ email })
     if (existingUser) {
       return res.status(400).json({ success: false, msg: 'Email already registered' })
@@ -65,7 +65,12 @@ export const login = async (req, res) => {
       return res.status(401).json({ success: false, msg: 'Invalid credentials' })
     }
 
-    //
+    // 3. If user of the particular email exists, let verify the hashed password
+    const isMatch = await bcrypt.compare(password, user.password)
+
+    if (!isMatch) {
+      return res.status(401).json({ success: false, msg: 'Invalid password' })
+    }
   } catch (error) {
     res.status(500).json({
       success: false,
