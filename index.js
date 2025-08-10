@@ -14,6 +14,7 @@ dotenv.config()
 connectDB()
 
 const app = express()
+app.use(express.json()) // <- must be BEFORE routes
 
 // Cookie-Parser to parse cookie which is JWT basically
 app.use(cookieParser())
@@ -28,8 +29,7 @@ app.use(
   })
 )
 
-app.use(express.json())
-
+// Test Home Route:
 app.get('/', (req, res) => {
   res.json({
     msg: 'All is well, that starts well'

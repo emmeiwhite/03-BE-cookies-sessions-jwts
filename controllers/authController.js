@@ -2,6 +2,7 @@ import User from '../models/User.js'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
+// 1. Signup
 export const signUp = async (req, res) => {
   // Testing  const user = await User.create(req.body)
   console.log(req.body)
@@ -40,5 +41,35 @@ export const signUp = async (req, res) => {
     })
   } catch (error) {
     res.status(500).json('Error while Signup')
+  }
+}
+
+// 2. Login
+export const login = async (req, res) => {
+  console.log(req.body)
+
+  try {
+    const { email, password } = req.body
+
+    // 1. Validate email & password
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        msg: 'email & password is mandatory!'
+      })
+    }
+
+    // 2. Check whether the email exists in the database
+    const user = await User.findOne({ email })
+    if (!user) {
+      return res.status(401).json({ success: false, msg: 'Invalid credentials' })
+    }
+
+    //
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      msg: 'Server Error!'
+    })
   }
 }
