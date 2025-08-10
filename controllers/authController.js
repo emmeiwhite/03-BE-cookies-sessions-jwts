@@ -86,10 +86,16 @@ export const login = async (req, res) => {
       sameSite: 'lax',
       maxAge: 15 * 60 * 1000
     })
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      msg: 'Server Error!'
+
+    // 6. Send Success Response to the client
+
+    res.status(200).json({
+      success: true,
+      msg: 'Successful Login!',
+      data: { userId: user._id, username: user.username, email: user.email }
     })
+  } catch (error) {
+    console.error('Login error:', err)
+    next(err) // forward to global error handler
   }
 }
