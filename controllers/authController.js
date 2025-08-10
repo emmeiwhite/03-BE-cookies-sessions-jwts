@@ -78,6 +78,14 @@ export const login = async (req, res) => {
     const payload = { userId: user._id.toString(), username: user.username }
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' })
+
+    // 5. Once the token is generated, we'll send the token to the client as cookie with httpsOnly
+    res.cookie('authToken', token, {
+      httpsOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 15 * 60 * 1000
+    })
   } catch (error) {
     res.status(500).json({
       success: false,
