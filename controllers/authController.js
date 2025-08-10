@@ -76,6 +76,8 @@ export const login = async (req, res) => {
     /**  We know that JWT has 3 parts Header.Payload.Signature, As a BE Developer we create payload, rest jsonwebtoken packages manages  */
 
     const payload = { userId: user._id.toString(), username: user.username }
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '15m' })
   } catch (error) {
     res.status(500).json({
       success: false,
